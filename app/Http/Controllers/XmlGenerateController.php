@@ -108,12 +108,13 @@ class XmlGenerateController extends Controller
         ];
         $xmlContent = str_replace(array_keys($xmlValues), array_values($xmlValues), $templateXml);
         $fileBaseName = Str::slug($validated['nama_data_spasial']) ?: 'metadata-spasial';
-        $fileName = $fileBaseName.'-'.now()->format('YmdHis').'-metadata.xml';
-        $filePath = 'generated-xml/'.$fileName;
+        $fileName = $fileBaseName . '-' . now()->format('YmdHis') . '-metadata.xml';
+        $filePath = 'generated-xml/' . $fileName;
 
         Storage::disk('local')->put($filePath, $xmlContent);
 
         $record = LogRecordGenerateXml::query()->create([
+            'master_opd_id' => $validated['master_opd_id'],
             'file_name' => $fileName,
             'file_path' => $filePath,
         ]);
@@ -140,7 +141,7 @@ class XmlGenerateController extends Controller
 
     private function generateLimitCacheKey(string $ipAddress): string
     {
-        return 'simantap_spasial_generate_count:'.now()->toDateString().':'.sha1($ipAddress);
+        return 'simantap_spasial_generate_count:' . now()->toDateString() . ':' . sha1($ipAddress);
     }
 
     private function dailyGenerateLimit(): int

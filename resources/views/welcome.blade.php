@@ -139,8 +139,10 @@
             </button>
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ url('/') }}">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('simantap-spasial') }}">SiMantap Spasial</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page"
+                            href="{{ url('/') }}">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('simantap-spasial') }}">SiMantap Spasial</a>
+                    </li>
                     {{-- <li class="nav-item"><a class="nav-link" href="#">Profil</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Aplikasi</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Publikasi</a></li>
@@ -199,13 +201,15 @@
                 </div>
                 <div class="row g-4">
                     <div class="col-md-6 col-lg-3">
-                        <a href="{{ route('simantap-spasial') }}" class="menu-card p-4 h-100 d-block text-decoration-none text-reset">
+                        <a href="{{ route('simantap-spasial') }}"
+                            class="menu-card p-4 h-100 d-block text-decoration-none text-reset">
                             <span class="badge rounded-pill mb-3">Dummy</span>
                             <h5 class="fw-bold">SiMantap Spasial</h5>
                             <p class="mb-0 text-secondary">Salah satu aplikasi pendukung pengelolaan informasi
                                 pembangunan daerah.</p>
                         </a>
                     </div>
+
                 </div>
             </div>
         </section>

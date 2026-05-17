@@ -5,6 +5,7 @@ use App\Http\Controllers\XmlGenerateController;
 use App\Models\LogRecordGenerateXml;
 use App\Models\MasterOpd;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 
@@ -60,7 +61,36 @@ Route::get('/simantapSpasial/download/{record}', function (LogRecordGenerateXml 
 })->name('simantap-spasial.download');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $usageByOpd = LogRecordGenerateXml::query()
+        ->select('master_opd_id', DB::raw('COUNT(*) as total'))
+        ->with('opd:id,name,name_akronim')
+        ->groupBy('master_opd_id')
+        ->orderByDesc('total')
+        ->get();
+
+    $recentGeneratedXml = LogRecordGenerateXml::query()
+        ->with('opd:id,name,name_akronim')
+        ->latest()
+        ->limit(10)
+        ->get();
+
+    $chartLabels = $usageByOpd
+        ->map(fn (LogRecordGenerateXml $record): string => $record->opd?->name_akronim ?: $record->opd?->name ?: 'Tanpa OPD')
+        ->values();
+
+    $chartValues = $usageByOpd
+        ->pluck('total')
+        ->map(fn ($total): int => (int) $total)
+        ->values();
+
+    return view('dashboard', [
+        'chartLabels' => $chartLabels,
+        'chartValues' => $chartValues,
+        'recentGeneratedXml' => $recentGeneratedXml,
+        'totalGeneratedXml' => LogRecordGenerateXml::query()->count(),
+        'todayGeneratedXml' => LogRecordGenerateXml::query()->whereDate('created_at', today())->count(),
+        'totalOpdGeneratingXml' => $usageByOpd->whereNotNull('master_opd_id')->count(),
+    ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
