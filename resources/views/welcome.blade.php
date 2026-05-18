@@ -235,7 +235,7 @@
                                 class="d-block w-100" alt="Ruang kerja perencanaan">
                             <div class="carousel-caption">
                                 <h5 class="fw-bold mb-1">Ruang Kerja Digital</h5>
-                                <p class="mb-0">Visual dummy untuk layanan dan informasi perencanaan.</p>
+                                <p class="mb-0"> untuk layanan dan informasi perencanaan.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
@@ -243,7 +243,7 @@
                                 class="d-block w-100" alt="Dashboard data">
                             <div class="carousel-caption">
                                 <h5 class="fw-bold mb-1">Informasi Kinerja</h5>
-                                <p class="mb-0">Visual dummy untuk ringkasan data dan publikasi pembangunan.</p>
+                                <p class="mb-0"> untuk ringkasan data dan publikasi pembangunan.</p>
                             </div>
                         </div>
                     </div>

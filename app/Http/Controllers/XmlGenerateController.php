@@ -100,7 +100,7 @@ class XmlGenerateController extends Controller
             '[ABSTRACT_DATA_SPASIAL]' => htmlspecialchars($validated['abstract_data_spasial'], ENT_XML1 | ENT_COMPAT, 'UTF-8'),
 
             '[URL_NAMA_DOMAIN]' => htmlspecialchars('https://geoportal.hulusungaiselatankab.go.id', ENT_XML1 | ENT_COMPAT, 'UTF-8'),
-
+            '[ABSTRACT]' => htmlspecialchars($validated['abstract_data_spasial'], ENT_XML1 | ENT_COMPAT, 'UTF-8'),
             '[IDENTIFIER_UNIK_DATASET]' => htmlspecialchars($this->toolsXmlGenerateService->getIdentifikasi($validated['nama_data_spasial'], $validated['tanggal_rilis']), ENT_XML1 | ENT_COMPAT, 'UTF-8'),
             '[TANGGAL_RILIS]' => htmlspecialchars($validated['tanggal_rilis'], ENT_XML1 | ENT_COMPAT, 'UTF-8'),
             // 'Data spasial yang di produksi oleh [NAMA_INSTANSI_PRODUSENDATA]' => htmlspecialchars($validated['deskripsi_data_spasial'], ENT_XML1 | ENT_COMPAT, 'UTF-8'),
