@@ -143,6 +143,7 @@
                             href="{{ url('/') }}">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('simantap-spasial') }}">SiMantap Spasial</a>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('kak-generate') }}">KAK Generate</a></li>
                     {{-- <li class="nav-item"><a class="nav-link" href="#">Profil</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Aplikasi</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Publikasi</a></li>
@@ -207,6 +208,15 @@
                             <h5 class="fw-bold">SiMantap Spasial</h5>
                             <p class="mb-0 text-secondary">Salah satu aplikasi pendukung pengelolaan informasi
                                 pembangunan daerah.</p>
+                        </a>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <a href="{{ route('kak-generate') }}"
+                            class="menu-card p-4 h-100 d-block text-decoration-none text-reset">
+                            <span class="badge rounded-pill mb-3">Layanan</span>
+                            <h5 class="fw-bold">KAK Generate</h5>
+                            <p class="mb-0 text-secondary">Layanan pendukung penyusunan Kerangka Acuan Kerja secara
+                                digital.</p>
                         </a>
                     </div>
 

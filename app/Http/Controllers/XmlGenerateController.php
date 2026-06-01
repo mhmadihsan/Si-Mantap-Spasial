@@ -146,6 +146,6 @@ class XmlGenerateController extends Controller
 
     private function dailyGenerateLimit(): int
     {
-        return 10;
+        return 100;
     }
 }

@@ -21,7 +21,7 @@ $makeSimantapSpasialCaptcha = function (): array {
 };
 
 $getRemainingGenerateXml = function (string $ipAddress, int $dailyGenerateLimit): int {
-    $cacheKey = 'simantap_spasial_generate_count:'.now()->toDateString().':'.sha1($ipAddress);
+    $cacheKey = 'simantap_spasial_generate_count:' . now()->toDateString() . ':' . sha1($ipAddress);
     $generatedToday = (int) Cache::get($cacheKey, 0);
 
     return max($dailyGenerateLimit - $generatedToday, 0);
@@ -35,7 +35,7 @@ Route::get('/simantapSpasial', function () use ($makeSimantapSpasialCaptcha, $ge
     $opds = MasterOpd::query()
         ->orderBy('name')
         ->get(['id', 'name', 'name_akronim']);
-    $dailyGenerateLimit = 10;
+    $dailyGenerateLimit = 100;
     $remainingGenerateXml = $getRemainingGenerateXml(request()->ip() ?? 'unknown', $dailyGenerateLimit);
     $captcha = $makeSimantapSpasialCaptcha();
 
@@ -60,6 +60,28 @@ Route::get('/simantapSpasial/download/{record}', function (LogRecordGenerateXml 
     ]);
 })->name('simantap-spasial.download');
 
+Route::get('/kakGenerate', function () {
+    $opds = MasterOpd::query()
+        ->orderBy('name')
+        ->get(['id', 'name', 'name_akronim']);
+
+    return view('kak-generate', compact('opds'));
+})->name('kak-generate');
+
+Route::post('/kakGenerate', function () {
+    request()->validate([
+        'master_opd_id' => ['required', 'exists:master_opds,id'],
+        'judul_data' => ['required', 'string', 'max:150'],
+    ], [
+        'master_opd_id.required' => 'Nama dinas wajib dipilih.',
+        'master_opd_id.exists' => 'Nama dinas tidak valid.',
+        'judul_data.required' => 'Judul data wajib diisi.',
+        'judul_data.max' => 'Judul data maksimal 150 karakter.',
+    ]);
+
+    return to_route('kak-generate')->with('success', 'Data KAK berhasil disiapkan.');
+})->name('kak-generate.submit');
+
 Route::get('/dashboard', function () {
     $usageByOpd = LogRecordGenerateXml::query()
         ->select('master_opd_id', DB::raw('COUNT(*) as total'))
@@ -75,12 +97,12 @@ Route::get('/dashboard', function () {
         ->get();
 
     $chartLabels = $usageByOpd
-        ->map(fn (LogRecordGenerateXml $record): string => $record->opd?->name_akronim ?: $record->opd?->name ?: 'Tanpa OPD')
+        ->map(fn(LogRecordGenerateXml $record): string => $record->opd?->name_akronim ?: $record->opd?->name ?: 'Tanpa OPD')
         ->values();
 
     $chartValues = $usageByOpd
         ->pluck('total')
-        ->map(fn ($total): int => (int) $total)
+        ->map(fn($total): int => (int) $total)
         ->values();
 
     return view('dashboard', [
@@ -99,4 +121,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

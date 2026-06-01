@@ -34,7 +34,7 @@ class SimantapSpasialPageTest extends TestCase
             ->assertSee('Badan Perencanaan Pembangunan, Riset dan Inovasi Daerah')
             ->assertSee('Bapperida')
             ->assertSee('Remaining Generate XML')
-            ->assertSee('10/10');
+            ->assertSee('100/100');
 
         $response->assertSessionHas('simantap_spasial_captcha_answer');
     }

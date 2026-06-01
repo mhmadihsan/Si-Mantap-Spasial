@@ -256,6 +256,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Beranda</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page"
                             href="{{ route('simantap-spasial') }}">SiMantap Spasial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('kak-generate') }}">KAK Generate</a></li>
                     @auth
                     <li class="nav-item ms-lg-3"><a class="btn btn-light btn-sm fw-semibold"
                             href="{{ route('dashboard') }}">Dashboard</a></li>

@@ -14,7 +14,7 @@
 | 1 | Membuka halaman SiMantap Spasial | Akses URL `/simantapSpasial` melalui HTTP GET | Sistem mengembalikan status HTTP 200 | Lulus |
 | 2 | Validasi konten utama halaman | Periksa tampilan teks `SiMantap Spasial`, `Generate XML`, `Nama Dinas`, dan `Nama Data Spasial` | Komponen utama form tampil pada halaman | Lulus |
 | 3 | Validasi data OPD | Siapkan data uji OPD Bapperida, lalu buka halaman | Data OPD muncul sebagai pilihan pada field Nama Dinas | Lulus |
-| 4 | Validasi kuota generate XML | Buka halaman dengan cache testing kosong | Kuota harian tampil `10/10` | Lulus |
+| 4 | Validasi kuota generate XML | Buka halaman dengan cache testing kosong | Kuota harian tampil `100/100` | Lulus |
 | 5 | Validasi captcha | Buka halaman dan periksa session captcha | Sistem membuat session `simantap_spasial_captcha_answer` | Lulus |
 
 ## Data Uji
